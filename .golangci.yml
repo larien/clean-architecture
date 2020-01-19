@@ -249,7 +249,7 @@ linters:
       #- staticcheck
     - gosimple
     - ineffassign
-    - deadcode
+      # - deadcode # TODO - bring this back when "`main` is unused" is fixed
       # - stylecheck
     - gosec
     - dupl
@@ -262,6 +262,7 @@ linters:
   disable:
     - staticcheck
     - megacheck
+    - deadcode
   disable-all: false
   presets:
     - bugs
