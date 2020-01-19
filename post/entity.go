@@ -1,5 +1,6 @@
 package post
 
+// Post represents the post entity's attributes.
 type Post struct {
 	ID        uint64    `json:"id"`
 	Title     string    `json:"title"`
