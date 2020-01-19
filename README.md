@@ -20,7 +20,7 @@ This exercise examplifies:
 
 ### Setup architecture
 
-- [ ] Implement linting
+- [X] Implement linting
 - [ ] Implement entity layer
 - [ ] Implement handler layer
 - [ ] Implement controller layer

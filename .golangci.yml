@@ -1,0 +1,132 @@
+run:
+  deadline: 1m
+  issues-exit-code: 1
+  tests: true
+  skip-files:
+  build-tags:
+output:
+  format: colored-line-number
+  print-issued-lines: true
+  print-linter-name: true
+linters-settings:
+  errcheck:
+    check-type-assertions: true
+    check-blank: false
+  govet:
+    copylocks: true
+    check-shadowing: true
+  golint:
+    min-confidence: 0.8
+  gofmt:
+    simplify: true
+  goimports:
+    local-prefixes: github.com/larien/clean-architecture
+  gocyclo:
+    min-complexity: 10
+  maligned:
+    suggest-new: true
+  dupl:
+    threshold: 100
+  goconst:
+    min-len: 3
+    min-occurrences: 3
+  lll:
+    line-length: 120
+    tab-width: 1
+  misspell:
+    locale: US
+  unparam:
+    check-exported: true
+  nakedret:
+    max-func-lines: 1
+  prealloc:
+    simple: true
+    range-loops: true
+    for-loops: true
+  gocritic:
+    enabled-checks:
+      - appendAssign
+      - argOrder
+      - appendCombine
+      - assignOp
+      - badCond
+      - boolExprSimplify
+      - builtinShadow
+      - captLocal
+      - caseOrder
+      - commentFormatting
+      - commentedOutCode
+      - commentedOutImport
+      - defaultCaseOrder
+      - deprecatedComment
+      - docStub
+      - dupArg
+      - dupBranchBody
+      - dupCase
+      - dupSubExpr
+      - elseif
+      - emptyFallthrough
+      - equalFold
+      - ifElseChain
+      - importShadow
+      - indexAlloc
+      - initClause
+      - methodExprCall
+      - nilValReturn
+      - offBy1
+      - ptrToRefParam
+      - rangeExprCopy
+      - regexpMust
+      - singleCaseSwitch
+      - sloppyLen
+      - sloppyReassign
+      - stringXbytes
+      - switchTrue
+      - typeAssertChain
+      - typeSwitchVar
+      - unnamedResult
+      - unslice
+      - valSwap
+      - weakCond
+      - yodaStyleExpr
+linters:
+  enable:
+    - errcheck
+    - govet
+    - misspell
+      #- staticcheck
+    - gosimple
+    - ineffassign
+    - deadcode
+      # - stylecheck
+    - gosec
+    - dupl
+    - unconvert
+    - gocyclo
+    - prealloc
+    - lll
+    - gocritic
+    - golint
+  disable:
+    - staticcheck
+    - megacheck
+  enable-all: false
+  disable-all: false
+  fast: false
+issues:
+  exclude-use-default: false
+  max-issues-per-linter: 0
+  max-same-issues: 0
+  exclude-rules:
+    - path: mage
+      linters:
+        - golint
+        - gosec
+        - stylecheck
+        - lll
+    - path: ".*mock.go"
+      linters:
+        - golint
+        - stylecheck
+        - lll
+  exclude:
