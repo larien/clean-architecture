@@ -12,5 +12,5 @@ func main(){
 
 	controller := post.NewController(repository)
 
-	_ := post.Handler(controller)
+	_ = post.Handler(controller)
 }
