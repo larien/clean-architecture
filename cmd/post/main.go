@@ -8,9 +8,9 @@ import (
 func main(){
 	fmt.Println("Hello, Lauren!")
 
-	repository := NewRepository()
+	repository := post.NewRepository()
 
-	controller := NewController(repository)
+	controller := post.NewController(repository)
 
-	_ := Handler(controller)
+	_ := post.Handler(controller)
 }
