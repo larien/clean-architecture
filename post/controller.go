@@ -8,7 +8,7 @@ type controller struct {
 	// attributes
 }
 
-func NewController() Controller {
+func NewController(r Repository) Controller {
 	return controller{
 		// initialized attributes
 	}

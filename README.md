@@ -24,7 +24,7 @@ This exercise examplifies:
 - [X] Implement entity layer
 - [X] Implement handler layer
 - [X] Implement controller layer
-- [ ] Implement repository layer
+- [X] Implement repository layer
 - [ ] Instantiate architecture in main
 
 ### Create
