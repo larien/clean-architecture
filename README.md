@@ -23,7 +23,7 @@ This exercise examplifies:
 - [X] Implement linting
 - [X] Implement entity layer
 - [X] Implement handler layer
-- [ ] Implement controller layer
+- [X] Implement controller layer
 - [ ] Implement repository layer
 - [ ] Instantiate architecture in main
 
