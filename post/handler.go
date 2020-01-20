@@ -6,7 +6,7 @@ import "net/http"
 type HandlerFunc func(w http.ResponseWriter, r *http.Request) (interface{}, int)
 
 // Handler exposes the defined feature for handler layer.
-func Handler() HandlerFunc { // TODO - receive Controller as parameter
+func Handler(c Controller) HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) (interface{}, int) {
 		// receives params
 		// calls controller layer
