@@ -21,8 +21,8 @@ This exercise examplifies:
 ### Setup architecture
 
 - [X] Implement linting
-- [ ] Implement entity layer
-- [ ] Implement handler layer
+- [X] Implement entity layer
+- [X] Implement handler layer
 - [ ] Implement controller layer
 - [ ] Implement repository layer
 - [ ] Instantiate architecture in main
