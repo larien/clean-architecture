@@ -1,6 +1,6 @@
 package post
 
-// import "time"
+import "time"
 
 // Post represents the post entity's attributes.
 type Post struct {
