@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"larien/clean-architecture/post"
+	"github.com/larien/clean-architecture/post"
 	"net/http"
 )
 

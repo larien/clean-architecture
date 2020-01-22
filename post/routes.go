@@ -1,14 +1,14 @@
 package post
 
 import (
-	"larien/clean-architecture/helper"
-	"larien/clean-architecture/helper/request"
+	"github.com/larien/clean-architecture/helper/request"
+	"github.com/larien/clean-architecture/helper/router"
 	"net/http"
 )
 
 // NewRoutes creates a router for Post and sets the endpoints
-func NewRoutes(c Controller) helper.Router {
-	r := router.NewRouter()
+func NewRoutes(c Controller) router.Router {
+	r := router.New()
 
 	r.Post("/posts", create(c)) // POST /posts/
 
