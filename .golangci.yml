@@ -154,6 +154,9 @@ linters-settings:
   govet:
     # report about shadowed variables
     check-shadowing: true
+  funlen:
+    lines: 160
+    statements: 40
 
     # settings per analyzer
     settings:
@@ -249,20 +252,37 @@ linters:
       #- staticcheck
     - gosimple
     - ineffassign
-      # - deadcode # TODO - bring this back when "`main` is unused" is fixed
+    - deadcode
       # - stylecheck
     - gosec
+    - goconst
+    - gocognit
+    - unparam
+    - dogsled
     - dupl
-    - unconvert
+    # - unconvert
     - gocyclo
     - prealloc
     - lll
     - gocritic
     - golint
-  disable:
+    - varcheck
     - staticcheck
     - megacheck
-    - deadcode
+    - unused
+    - bodyclose
+    - rowserrcheck
+    - interfacer
+    - scopelint
+    - gochecknoinits
+    # - gochecknoglobals
+    - godox
+    - funlen
+    - whitespace
+    # - wsl
+    - goprintffuncname
+    - gomnd
+  disable:
   disable-all: false
   presets:
     - bugs

@@ -1,7 +1,7 @@
-package post
+package article
 
 type Controller interface {
-	// TODO - implement methods
+	Create(p *Article) error
 }
 
 type controller struct {
@@ -9,13 +9,11 @@ type controller struct {
 }
 
 func NewController(r Repository) Controller {
-	return controller{
+	return &controller{
 		// initialized attributes
 	}
 }
 
-func (c *controller) Method(){
-	// method stuff
+func (c *controller) Create(p *Article) error {
+	return nil
 }
-
-// methods implemented
