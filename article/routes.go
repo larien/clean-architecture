@@ -1,4 +1,4 @@
-package post
+package article
 
 import (
 	"log"
@@ -8,31 +8,31 @@ import (
 	"github.com/larien/clean-architecture/helper/router"
 )
 
-// NewRoutes creates a router for Post and sets the endpoints
+// NewRoutes creates a router for Article and sets the endpoints
 func NewRoutes(c Controller) router.Router {
 	r := router.New()
 
-	r.Post("/posts", create(c)) // POST /posts/
+	r.Post("/articles", create(c)) // POST /articles/
 
 	return r
 }
 
-// create is the handler for Post creation and handles POST /posts
+// create is the handler for Article creation and handles POST /articles
 func create(c Controller) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var post *Post
-		if err := request.Read(r, post); err != nil {
+		var article *Article
+		if err := request.Read(r, article); err != nil {
 			log.Printf("an error occurred when parsing JSON: %v", err)
 			request.Error(w, http.StatusBadRequest, err)
 			return
 		}
 
-		if err := c.Create(post); err != nil {
-			log.Printf("an error occurred when creating a post: %v", err)
+		if err := c.Create(article); err != nil {
+			log.Printf("an error occurred when creating a article: %v", err)
 			request.Error(w, http.StatusInternalServerError, err)
 			return
 		}
 
-		request.Success(w, http.StatusOK, "Post created successfully")
+		request.Success(w, http.StatusOK, "Article created successfully")
 	}
 }

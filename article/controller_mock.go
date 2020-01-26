@@ -1,4 +1,4 @@
-package post
+package article
 
 import (
 	"github.com/stretchr/testify/mock"
@@ -10,7 +10,7 @@ type MockController struct {
 }
 
 // create represents the mocked method for Create feature in Controller layer
-func (m *MockController) Create(post *Post) error {
-	args := m.Called(post)
+func (m *MockController) Create(article *Article) error {
+	args := m.Called(article)
 	return args.Error(0)
 }

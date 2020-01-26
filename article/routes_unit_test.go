@@ -1,4 +1,4 @@
-package post
+package article
 
 import (
 	"bytes"
@@ -13,7 +13,7 @@ import (
 	assert "github.com/stretchr/testify/require"
 )
 
-func TestPost_NewRouter(t *testing.T) {
+func TestArticle_NewRouter(t *testing.T) {
 	t.Parallel()
 	t.Run("when Router is created", func(t *testing.T) {
 		t.Parallel()
@@ -27,7 +27,7 @@ func TestPost_NewRouter(t *testing.T) {
 	})
 }
 
-func TestPost_create(t *testing.T) {
+func TestArticle_create(t *testing.T) {
 	t.Parallel()
 	t.Run("when JSON is invalid", func(t *testing.T) {
 		t.Parallel()
@@ -38,7 +38,7 @@ func TestPost_create(t *testing.T) {
 		invalidJSON := `{ invalid_json:"" }`
 		req := httptest.NewRequest(
 			http.MethodPost,
-			"/posts",
+			"/articles",
 			bytes.NewBufferString(invalidJSON),
 		)
 		rec := httptest.NewRecorder()
@@ -61,12 +61,12 @@ func TestPost_create(t *testing.T) {
 				Return(errors.New("error")).
 				Once()
 
-			post := &Post{}
-			err := faker.FakeData(post)
+			article := &Article{}
+			err := faker.FakeData(article)
 			is.Nil(err)
 
-			body, _ := json.Marshal(post)
-			req := httptest.NewRequest(http.MethodPost, "/posts", bytes.NewBuffer(body))
+			body, _ := json.Marshal(article)
+			req := httptest.NewRequest(http.MethodPost, "/articles", bytes.NewBuffer(body))
 			rec := httptest.NewRecorder()
 
 			handler := http.HandlerFunc(create(c))
@@ -85,12 +85,12 @@ func TestPost_create(t *testing.T) {
 				Return(nil).
 				Once()
 
-			post := &Post{}
-			err := faker.FakeData(post)
+			article := &Article{}
+			err := faker.FakeData(article)
 			is.Nil(err)
 
-			body, _ := json.Marshal(post)
-			req := httptest.NewRequest(http.MethodPost, "/posts", bytes.NewBuffer(body))
+			body, _ := json.Marshal(article)
+			req := httptest.NewRequest(http.MethodPost, "/articles", bytes.NewBuffer(body))
 			rec := httptest.NewRecorder()
 
 			handler := http.HandlerFunc(create(c))

@@ -1,7 +1,7 @@
-package post
+package article
 
 type Controller interface {
-	Create(p *Post) error
+	Create(p *Article) error
 }
 
 type controller struct {
@@ -14,6 +14,6 @@ func NewController(r Repository) Controller {
 	}
 }
 
-func (c *controller) Create(p *Post) error {
+func (c *controller) Create(p *Article) error {
 	return nil
 }

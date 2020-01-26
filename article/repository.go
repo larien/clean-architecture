@@ -1,4 +1,4 @@
-package post
+package article
 
 type Repository interface {
 	// TODO - implement methods
