@@ -253,7 +253,7 @@ linters:
       # - stylecheck
     - gosec
     - dupl
-    - unconvert
+    # - unconvert
     - gocyclo
     - prealloc
     - lll
