@@ -26,13 +26,15 @@ This exercise examplifies:
 - [X] Implement controller layer
 - [X] Implement repository layer
 - [X] Initialize architecture in main
+- [X] Implement go mod
 
 ### Create
 
-- [ ] Implement POST method for handler layer
+- [X] Implement POST method for handler layer
+- [X] Implement mocks for Create method for controller layer
 - [ ] Implement Create method for controller layer
+- [ ] Implement mocks for Create method for repository layer
 - [ ] Implement Create method for repository layer
-- [ ] Implement mocks for Create method
 - [ ] Implement integration test for Create method
 
 ### List
