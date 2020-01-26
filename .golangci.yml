@@ -252,7 +252,7 @@ linters:
       #- staticcheck
     - gosimple
     - ineffassign
-    - deadcode # TODO - bring this back when "`main` is unused" is fixed
+    - deadcode
       # - stylecheck
     - gosec
     - goconst

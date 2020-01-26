@@ -4,7 +4,7 @@ import (
 	"github.com/stretchr/testify/mock"
 )
 
-// MockController injects mock dependency into controller.
+// MockController injects mock dependency into controller
 type MockController struct {
 	mock.Mock
 }

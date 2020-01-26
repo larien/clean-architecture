@@ -100,7 +100,3 @@ func TestPost_create(t *testing.T) {
 		})
 	})
 }
-
-// invalid JSON
-
-// valid json

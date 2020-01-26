@@ -17,6 +17,7 @@ func NewRoutes(c Controller) router.Router {
 	return r
 }
 
+// create is the handler for Post creation and handles POST /posts
 func create(c Controller) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var post *Post
