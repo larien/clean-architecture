@@ -32,8 +32,8 @@ This exercise examplifies:
 
 - [X] Implement POST method for handler layer
 - [X] Implement mocks for Create method for controller layer
-- [ ] Implement Create method for controller layer
-- [ ] Implement mocks for Create method for repository layer
+- [X] Implement Create method for controller layer
+- [X] Implement mocks for Create method for repository layer
 - [ ] Implement Create method for repository layer
 - [ ] Implement integration test for Create method
 

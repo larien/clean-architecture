@@ -15,7 +15,7 @@ import (
 
 func TestArticle_NewRouter(t *testing.T) {
 	t.Parallel()
-	t.Run("when Router is created", func(t *testing.T) {
+	t.Run("when Routes is created", func(t *testing.T) {
 		t.Parallel()
 		is := assert.New(t)
 
