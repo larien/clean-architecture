@@ -1,21 +1,23 @@
 package article
 
+// Repository defines the methods to be exposed in Repository layer
 type Repository interface {
-	// TODO - implement methods
+	// Create saves the article in database
+	Create(a *Article) error
 }
 
 type repository struct {
 	// attributes
 }
 
+// NewRepository creates a new Repository with access to database
 func NewRepository() Repository {
-	return repository{
+	// create database
+	return &repository{
 		// initialized attributes
 	}
 }
 
-func (r *repository) Method(){
-	// method stuff
+func (r *repository) Create(a *Article) error {
+	return nil
 }
-
-// methods implemented
