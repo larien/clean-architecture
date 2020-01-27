@@ -1,19 +1,23 @@
 package article
 
+// Controller defines the methods to be exposed in Controller layer
 type Controller interface {
-	Create(p *Article) error
+	// Create requests the received article to be stored
+	Create(a *Article) error
 }
 
+// controller holds the dependencies for Controller layer
 type controller struct {
-	// attributes
+	Repository
 }
 
+// NewController creates a new Controller with access to Repository methods
 func NewController(r Repository) Controller {
 	return &controller{
-		// initialized attributes
+		Repository: r,
 	}
 }
 
-func (c *controller) Create(p *Article) error {
-	return nil
+func (c *controller) Create(a *Article) error {
+	return c.Repository.Create(a)
 }
