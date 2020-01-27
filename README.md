@@ -27,6 +27,7 @@ This exercise examplifies:
 - [X] Implement repository layer
 - [X] Initialize architecture in main
 - [X] Implement go mod
+- [ ] Implement GitHub Actions
 
 ### Create
 
