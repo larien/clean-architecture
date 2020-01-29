@@ -2,14 +2,15 @@ package main
 
 import (
 	"fmt"
-	"github.com/larien/clean-architecture/article"
 	"net/http"
+
+	"github.com/larien/clean-architecture/article"
 )
 
 func main() {
 	fmt.Println("Hello, Lauren!")
 
-	repository := article.NewRepository()
+	repository := article.NewRepository("localhost", "larien", "clean_architecture", "")
 
 	controller := article.NewController(repository)
 
