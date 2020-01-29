@@ -2,6 +2,7 @@ package database
 
 import (
 	"github.com/jinzhu/gorm"
+	// postgres allows the postgres driver into the project
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
