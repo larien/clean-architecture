@@ -2,15 +2,25 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 
 	"github.com/larien/clean-architecture/article"
+	"github.com/larien/clean-architecture/helper/database"
 )
 
 func main() {
 	fmt.Println("Hello, Lauren!")
 
-	repository := article.NewRepository("localhost", "larien", "clean_architecture", "")
+	db, err := database.New("localhost", "larien", "clean_architecture", "")
+	if err != nil {
+		log.Fatalf("failed to connect to database: %v", err)
+	}
+	defer db.Close()
+
+	db.DropTableIfExists(&article.Article{}) // remove
+
+	repository := article.NewRepository(db)
 
 	controller := article.NewController(repository)
 
