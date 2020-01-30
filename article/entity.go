@@ -1,6 +1,10 @@
 package article
 
-import "time"
+import (
+	"encoding/json"
+	"net/http"
+	"time"
+)
 
 // Article represents the article entity's attributes.
 type Article struct {
@@ -13,4 +17,6 @@ type Article struct {
 	DeletedAt *time.Time `json:"deleted_at,omitempty" sql:"index"`
 }
 
+func (a *Article) Decode(r *http.Request) error {
+	return json.NewDecoder(r.Body).Decode(&a)
 }
