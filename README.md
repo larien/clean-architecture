@@ -35,7 +35,7 @@ This exercise examplifies:
 - [X] Implement mocks for Create method for controller layer
 - [X] Implement Create method for controller layer
 - [X] Implement mocks for Create method for repository layer
-- [ ] Implement Create method for repository layer
+- [X] Implement Create method for repository layer
 - [ ] Implement integration test for Create method
 
 ### List
@@ -67,3 +67,8 @@ This exercise examplifies:
 - [ ] Dockerize Go
 - [ ] Dockerize PostgreSQL
 - [ ] Implement docker-compose
+
+### Technical Debt
+
+- [ ] Implement decoder as middleware
+- [ ] Implement encoder as middleware
