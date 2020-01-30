@@ -1,8 +1,6 @@
 package article
 
 import (
-	"log"
-
 	"github.com/larien/clean-architecture/helper/database"
 )
 
@@ -23,6 +21,7 @@ func NewRepository(db database.Driver) Repository {
 	return &repository{db}
 }
 
+// Create inserts the article into the database
 func (r *repository) Create(a *Article) error {
-	return nil
+	return r.DB.Create(a).Error
 }
