@@ -18,21 +18,21 @@ func NewRoutes(c Controller) router.Router {
 }
 
 // create is the handler for Article creation and handles POST /articles
-func create(c Controller) http.HandlerFunc {
+func create(controller Controller) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		var article *Article
-		if err := request.Read(r, article); err != nil {
+		article := &Article{}
+		if err := article.Decode(r); err != nil {
 			log.Printf("an error occurred when parsing JSON: %v", err)
 			request.Error(w, http.StatusBadRequest, err)
 			return
 		}
 
-		if err := c.Create(article); err != nil {
+		if err := controller.Create(article); err != nil {
 			log.Printf("an error occurred when creating a article: %v", err)
 			request.Error(w, http.StatusInternalServerError, err)
 			return
 		}
 
-		request.Success(w, http.StatusOK, "Article created successfully")
+		request.Write(w, http.StatusOK, article)
 	}
 }
