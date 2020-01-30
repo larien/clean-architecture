@@ -18,12 +18,8 @@ type repository struct {
 }
 
 // NewRepository creates a new Repository with access to database
-func NewRepository(host, user, dbname, password string) Repository {
-	db, err := database.New(host, user, dbname, password)
-	if err != nil {
-		log.Fatalf("failed to connect to database: %v", err)
-	}
-
+func NewRepository(db database.Driver) Repository {
+	db.AutoMigrate(&Article{})
 	return &repository{db}
 }
 
