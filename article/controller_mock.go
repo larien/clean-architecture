@@ -19,7 +19,7 @@ func (m *MockController) Create(article *Article) error {
 func (m *MockController) List() ([]*Article, error) {
 	args := m.Called(nil)
 	if args.Get(0) == nil {
-		return nil, args.Error(0)
+		return nil, args.Error(1)
 	}
-	return args.Get(0).([]*Article), args.Error(0)
+	return args.Get(0).([]*Article), nil
 }
