@@ -41,9 +41,9 @@ This exercise examplifies:
 ### List
 
 - [X] Implement GET method for handler layer
-- [ ] Implement List method for controller layer
+- [X] Implement List method for controller layer
 - [ ] Implement List method for repository layer
-- [ ] Implement mocks for List method
+- [X] Implement mocks for List method
 - [ ] Implement integration test for List method
 
 ### Detail
