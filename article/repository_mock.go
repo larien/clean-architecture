@@ -16,10 +16,10 @@ func (m *MockRepository) Create(article *Article) error {
 }
 
 // List represents the mocked method for List feature in Repository layer
-func (m *MockRepository) List() ([]*Article, error) {
+func (m *MockRepository) List() (*[]Article, error) {
 	args := m.Called(nil)
 	if args.Get(0) == nil {
 		return nil, args.Error(1)
 	}
-	return args.Get(0).([]*Article), nil
+	return args.Get(0).(*[]Article), nil
 }

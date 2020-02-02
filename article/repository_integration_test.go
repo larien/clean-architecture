@@ -5,7 +5,9 @@ import (
 )
 
 func TestRepository_Create(t *testing.T) {
+	t.Parallel()
 	t.Run("when repository fails to create article", func(t *testing.T) {
+		t.Parallel()
 		// is := assert.New(t)
 
 		// db, err := database.New("localhost", "larien", "clean_architecture", "")
@@ -44,4 +46,32 @@ func TestRepository_Create(t *testing.T) {
 		// is.Nil(res.Error)
 		// is.Equal(article.ID, article2.ID)
 	})
+}
+
+func TestRepository_List(t *testing.T) {
+	// t.Parallel()
+	// t.Run("when repository fails to list articles", func(t *testing.T) {
+	// 	t.Parallel()
+	// })
+	// t.Run("when repository succeeds to list articles", func(t *testing.T) {
+	// 	t.Parallel()
+	// 	is := assert.New(t)
+
+	// 	db, err := database.New("localhost", "larien", "clean_architecture", "")
+	// 	if err != nil {
+	// 		t.Fatalf("failed to connect to database: %v", err)
+	// 	}
+
+	// 	repository := NewRepository(db)
+	// 	is.NotNil(repository)
+
+	// 	// db.Close()
+	// 	article := &Article{}
+	// 	is.Nil(faker.FakeData(article))
+	// 	is.Nil(db.Create(article).Error)
+
+	// 	result, err := repository.List()
+	// 	is.Nil(err)
+	// 	is.NotNil(result)
+	// })
 }
