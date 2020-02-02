@@ -12,7 +12,8 @@ import (
 func NewRoutes(c Controller) router.Router {
 	r := router.New()
 
-	r.Post("/articles", create(c)) // POST /articles/
+	r.Post("/articles", create(c)) // POST /articles
+	r.Get("/articles", list(c))    // GET /articles
 
 	return r
 }
@@ -34,5 +35,19 @@ func create(controller Controller) http.HandlerFunc {
 		}
 
 		request.Write(w, http.StatusOK, article)
+	}
+}
+
+// list is the handler for Article's list and handles GET /articles
+func list(controller Controller) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		articles, err := controller.List()
+		if err != nil {
+			log.Printf("an error occurred when listing the articles: %v", err)
+			request.Error(w, http.StatusInternalServerError, err)
+			return
+		}
+
+		request.Write(w, http.StatusOK, articles)
 	}
 }
