@@ -86,23 +86,23 @@ func TestController_List(t *testing.T) {
 		r := new(MockRepository)
 		defer r.AssertExpectations(t)
 
-		article := &Article{
+		article := Article{
 			Title:   faker.Sentence(),
 			Content: faker.Paragraph(),
 			Author:  faker.Name(),
 		}
 
-		var articles []*Article
+		var articles []Article
 		articles = append(articles, article)
 
 		r.On("List", mock.Anything).
-			Return(articles, nil).
+			Return(&articles, nil).
 			Once()
 
 		c := NewController(r)
 
 		result, err := c.List()
 		is.Nil(err)
-		is.Equal(articles, result)
+		is.Equal(&articles, result)
 	})
 }

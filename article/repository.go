@@ -9,7 +9,7 @@ type Repository interface {
 	// Create inserts the article into the database
 	Create(a *Article) error
 	// List selects all articles from database
-	List() ([]*Article, error)
+	List() (*[]Article, error)
 }
 
 // repository holds the dependencies for Controller layer
@@ -27,6 +27,8 @@ func (r *repository) Create(a *Article) error {
 	return r.DB.Create(a).Error
 }
 
-func (r *repository) List() ([]*Article, error) {
-	return nil, nil
+func (r *repository) List() (*[]Article, error) {
+	articles := new([]Article)
+	db := r.DB.Find(articles)
+	return articles, db.Error
 }
