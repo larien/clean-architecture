@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/bxcodec/faker"
+	"github.com/bxcodec/faker/v3"
 	"github.com/stretchr/testify/mock"
 	assert "github.com/stretchr/testify/require"
 )
@@ -81,6 +81,28 @@ func TestController_List(t *testing.T) {
 	})
 	t.Run("when repository succeeds", func(t *testing.T) {
 		t.Parallel()
+		is := assert.New(t)
 
+		r := new(MockRepository)
+		defer r.AssertExpectations(t)
+
+		article := &Article{
+			Title:   faker.Sentence(),
+			Content: faker.Paragraph(),
+			Author:  faker.Name(),
+		}
+
+		var articles []*Article
+		articles = append(articles, article)
+
+		r.On("List", mock.Anything).
+			Return(articles, nil).
+			Once()
+
+		c := NewController(r)
+
+		result, err := c.List()
+		is.Nil(err)
+		is.Equal(articles, result)
 	})
 }
