@@ -145,6 +145,36 @@ func TestRoutes_list(t *testing.T) {
 		})
 		t.Run("and articles were found", func(t *testing.T) {
 			t.Parallel()
+			is := assert.New(t)
+
+			c := new(MockController)
+			defer c.AssertExpectations(t)
+
+			article := &Article{
+				Title:   faker.Sentence(),
+				Content: faker.Paragraph(),
+				Author:  faker.Name(),
+			}
+
+			var articles []*Article
+			articles = append(articles, article)
+
+			body, _ := json.Marshal(articles)
+
+			c.On("List", mock.Anything).
+				Return(articles, nil).
+				Once()
+
+			req := httptest.NewRequest(http.MethodGet, "/articles", bytes.NewBuffer(body))
+			rec := httptest.NewRecorder()
+
+			handler := http.HandlerFunc(list(c))
+			handler.ServeHTTP(rec, req)
+
+			is.Equal(http.StatusOK, rec.Code)
+			var result []*Article
+			is.Nil(json.Unmarshal(rec.Body.Bytes(), &result))
+			is.Equal(articles, result)
 		})
 	})
 }
