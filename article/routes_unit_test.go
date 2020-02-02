@@ -8,12 +8,12 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/bxcodec/faker"
+	"github.com/bxcodec/faker/v3"
 	"github.com/stretchr/testify/mock"
 	assert "github.com/stretchr/testify/require"
 )
 
-func TestArticle_NewRouter(t *testing.T) {
+func TestRoutes_NewRouter(t *testing.T) {
 	t.Parallel()
 	t.Run("when Routes is created", func(t *testing.T) {
 		t.Parallel()
@@ -27,7 +27,7 @@ func TestArticle_NewRouter(t *testing.T) {
 	})
 }
 
-func TestArticle_create(t *testing.T) {
+func TestRoutes_create(t *testing.T) {
 	t.Parallel()
 	t.Run("when JSON is invalid", func(t *testing.T) {
 		t.Parallel()
@@ -97,6 +97,84 @@ func TestArticle_create(t *testing.T) {
 			handler.ServeHTTP(rec, req)
 
 			is.Equal(http.StatusOK, rec.Code)
+		})
+	})
+}
+
+func TestRoutes_list(t *testing.T) {
+	t.Parallel()
+	t.Run("when controller fails", func(t *testing.T) {
+		t.Parallel()
+		is := assert.New(t)
+
+		c := new(MockController)
+		defer c.AssertExpectations(t)
+
+		c.On("List", mock.Anything).
+			Return(nil, errors.New("error")).
+			Once()
+
+		req := httptest.NewRequest(http.MethodGet, "/articles", nil)
+		rec := httptest.NewRecorder()
+
+		handler := http.HandlerFunc(list(c))
+		handler.ServeHTTP(rec, req)
+
+		is.Equal(http.StatusInternalServerError, rec.Code)
+	})
+	t.Run("when controller succeeds", func(t *testing.T) {
+		t.Parallel()
+		t.Run("and no article was found", func(t *testing.T) {
+			t.Parallel()
+			is := assert.New(t)
+
+			c := new(MockController)
+			defer c.AssertExpectations(t)
+
+			c.On("List", mock.Anything).
+				Return(nil, nil).
+				Once()
+
+			req := httptest.NewRequest(http.MethodGet, "/articles", nil)
+			rec := httptest.NewRecorder()
+
+			handler := http.HandlerFunc(list(c))
+			handler.ServeHTTP(rec, req)
+
+			is.Equal(http.StatusNotFound, rec.Code)
+		})
+		t.Run("and articles were found", func(t *testing.T) {
+			t.Parallel()
+			is := assert.New(t)
+
+			c := new(MockController)
+			defer c.AssertExpectations(t)
+
+			article := &Article{
+				Title:   faker.Sentence(),
+				Content: faker.Paragraph(),
+				Author:  faker.Name(),
+			}
+
+			var articles []*Article
+			articles = append(articles, article)
+
+			body, _ := json.Marshal(articles)
+
+			c.On("List", mock.Anything).
+				Return(articles, nil).
+				Once()
+
+			req := httptest.NewRequest(http.MethodGet, "/articles", bytes.NewBuffer(body))
+			rec := httptest.NewRecorder()
+
+			handler := http.HandlerFunc(list(c))
+			handler.ServeHTTP(rec, req)
+
+			is.Equal(http.StatusOK, rec.Code)
+			var result []*Article
+			is.Nil(json.Unmarshal(rec.Body.Bytes(), &result))
+			is.Equal(articles, result)
 		})
 	})
 }

@@ -40,7 +40,7 @@ This exercise examplifies:
 
 ### List
 
-- [ ] Implement GET method for handler layer
+- [X] Implement GET method for handler layer
 - [ ] Implement List method for controller layer
 - [ ] Implement List method for repository layer
 - [ ] Implement mocks for List method
