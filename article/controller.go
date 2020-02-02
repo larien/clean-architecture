@@ -25,5 +25,5 @@ func (c *controller) Create(a *Article) error {
 }
 
 func (c *controller) List() ([]*Article, error) {
-	return nil, nil
+	return c.Repository.List()
 }
