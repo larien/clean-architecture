@@ -47,6 +47,9 @@ func list(controller Controller) http.HandlerFunc {
 			request.Error(w, http.StatusInternalServerError, err)
 			return
 		}
+		if articles == nil {
+			request.Write(w, http.StatusNotFound, nil)
+		}
 
 		request.Write(w, http.StatusOK, articles)
 	}

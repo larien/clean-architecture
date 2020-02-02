@@ -126,6 +126,22 @@ func TestRoutes_list(t *testing.T) {
 		t.Parallel()
 		t.Run("and no article was found", func(t *testing.T) {
 			t.Parallel()
+			is := assert.New(t)
+
+			c := new(MockController)
+			defer c.AssertExpectations(t)
+
+			c.On("List", mock.Anything).
+				Return(nil, nil).
+				Once()
+
+			req := httptest.NewRequest(http.MethodGet, "/articles", nil)
+			rec := httptest.NewRecorder()
+
+			handler := http.HandlerFunc(list(c))
+			handler.ServeHTTP(rec, req)
+
+			is.Equal(http.StatusNotFound, rec.Code)
 		})
 		t.Run("and articles were found", func(t *testing.T) {
 			t.Parallel()
