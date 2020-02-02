@@ -6,8 +6,10 @@ import (
 
 // Repository defines the methods to be exposed in Repository layer
 type Repository interface {
-	// Create saves the article in database
+	// Create inserts the article into the database
 	Create(a *Article) error
+	// List selects all articles from database
+	List() ([]*Article, error)
 }
 
 // repository holds the dependencies for Controller layer
@@ -21,7 +23,10 @@ func NewRepository(db database.Driver) Repository {
 	return &repository{db}
 }
 
-// Create inserts the article into the database
 func (r *repository) Create(a *Article) error {
 	return r.DB.Create(a).Error
+}
+
+func (r *repository) List() ([]*Article, error) {
+	return nil, nil
 }
