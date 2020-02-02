@@ -272,7 +272,7 @@ linters:
     - unused
     - bodyclose
     - rowserrcheck
-    - interfacer
+    # - interfacer
     - scopelint
     - gochecknoinits
     # - gochecknoglobals
