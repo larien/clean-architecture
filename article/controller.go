@@ -6,6 +6,8 @@ type Controller interface {
 	Create(a *Article) error
 	// List returns all the stored articles
 	List() (*[]Article, error)
+	// Detail returns an article by its ID
+	Detail(ID uint) (*Article, error)
 }
 
 // controller holds the dependencies for Controller layer
@@ -26,4 +28,8 @@ func (c *controller) Create(a *Article) error {
 
 func (c *controller) List() (*[]Article, error) {
 	return c.Repository.List()
+}
+
+func (c *controller) Detail(id uint) (*Article, error) {
+	return nil, nil
 }

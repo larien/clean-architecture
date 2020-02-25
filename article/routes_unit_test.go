@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -175,6 +176,56 @@ func TestRoutes_list(t *testing.T) {
 			var result []Article
 			is.Nil(json.Unmarshal(rec.Body.Bytes(), &result))
 			is.Equal(articles, result)
+		})
+	})
+}
+
+func TestRoutes_detail(t *testing.T) {
+	t.Parallel()
+	t.Run("when ID is invalid", func(t *testing.T) {
+		t.Parallel()
+		is := assert.New(t)
+
+		c := new(MockController)
+		defer c.AssertExpectations(t)
+
+		id := faker.UUIDDigit()
+		req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/articles/%s/detail", id), nil)
+		rec := httptest.NewRecorder()
+
+		handler := http.HandlerFunc(detail(c))
+		handler.ServeHTTP(rec, req)
+
+		is.Equal(http.StatusBadRequest, rec.Code)
+	})
+	t.Run("when controller fails", func(t *testing.T) {
+		t.Parallel()
+		is := assert.New(t)
+
+		c := new(MockController)
+		defer c.AssertExpectations(t)
+
+		c.On("Detail", mock.Anything).
+			Return(nil, errors.New("error")).
+			Once()
+
+		id := faker.UnixTime()
+		fmt.Println(id)
+		req := httptest.NewRequest(http.MethodGet, fmt.Sprintf("/articles/%d/detail", id), nil)
+		rec := httptest.NewRecorder()
+
+		handler := http.HandlerFunc(detail(c))
+		handler.ServeHTTP(rec, req)
+
+		is.Equal(http.StatusInternalServerError, rec.Code)
+	})
+	t.Run("when controller succeeds", func(t *testing.T) {
+		t.Parallel()
+		t.Run("and the article isn't found", func(t *testing.T) {
+			t.Parallel()
+		})
+		t.Run("and the article is found", func(t *testing.T) {
+			t.Parallel()
 		})
 	})
 }

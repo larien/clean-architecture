@@ -18,8 +18,8 @@ func New() Router {
 	router := chi.NewRouter()
 	router.Use(
 		middleware.Logger,
-		middleware.DefaultCompress,
-		middleware.RedirectSlashes,
+		// middleware.DefaultCompress,
+		// middleware.RedirectSlashes,
 		middleware.Recoverer,
 	)
 

@@ -23,3 +23,12 @@ func (m *MockController) List() (*[]Article, error) {
 	}
 	return args.Get(0).(*[]Article), nil
 }
+
+// Detail represents the mocked method for Detail feature in Controller layer
+func (m *MockController) Detail(id uint) (*Article, error) {
+	args := m.Called(id)
+	if args.Get(0) == nil {
+		return nil, args.Error(1)
+	}
+	return args.Get(0).(*Article), nil
+}

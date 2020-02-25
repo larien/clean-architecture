@@ -2,8 +2,10 @@ package request
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 )
 
 // Write encodes the response for a request with its status code
@@ -27,4 +29,16 @@ func Error(w http.ResponseWriter, statusCode int, err error) {
 	Write(w, statusCode, struct {
 		Error string `json:"error"`
 	}{err.Error()})
+}
+
+// ParseID receives ID from request and converts it into expected ID type (uint)
+func ParseID(id string) (uint, error) {
+	if id == "" {
+		return 0, errors.New("empty ID")
+	}
+	parsedID, err := strconv.Atoi(id)
+	if err != nil {
+		return 0, err
+	}
+	return uint(parsedID), nil
 }

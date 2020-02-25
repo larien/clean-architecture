@@ -1,6 +1,7 @@
 package article
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
@@ -12,8 +13,13 @@ import (
 func NewRoutes(c Controller) router.Router {
 	r := router.New()
 
-	r.Post("/articles", create(c)) // POST /articles
-	r.Get("/articles", list(c))    // GET /articles
+	r.Post("/articles", create(c))                    // POST /articles
+	r.Get("/articles", list(c))                       // GET /articles
+	r.Get("/articles/{article_id}/detail", detail(c)) // GET /articles/{article_id}/detail
+
+	// r.Route("/articles", func(r chi.Router) {
+	// 	r.Get("/{article_id}/detail", detail(c))
+	// })
 
 	return r
 }
@@ -29,7 +35,7 @@ func create(controller Controller) http.HandlerFunc {
 		}
 
 		if err := controller.Create(article); err != nil {
-			log.Printf("an error occurred when creating a article: %v", err)
+			log.Printf("an error occurred when creating the article: %v", err)
 			request.Error(w, http.StatusInternalServerError, err)
 			return
 		}
@@ -54,5 +60,32 @@ func list(controller Controller) http.HandlerFunc {
 		}
 
 		request.Write(w, http.StatusOK, articles)
+	}
+}
+
+// detail is the handler for Article's detail and handles GET /articles/{article_id}/detail
+func detail(controller Controller) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		fmt.Printf("ID: %+v\n", r.URL.Query())
+		articleID, err := request.ParseID(router.GetParamFromURL(r, "article_id"))
+		if err != nil {
+			log.Printf("couldn't parse article ID: %v", err)
+			request.Error(w, http.StatusBadRequest, err)
+			return
+		}
+
+		article, err := controller.Detail(articleID)
+		if err != nil {
+			log.Printf("an error occurred when detailing article %d: %v", articleID, err)
+			request.Error(w, http.StatusInternalServerError, err)
+			return
+		}
+
+		if article == nil {
+			request.Write(w, http.StatusNotFound, nil)
+			return
+		}
+
+		request.Write(w, http.StatusOK, article)
 	}
 }
