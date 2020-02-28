@@ -1,0 +1,10 @@
+name: Linter
+on: [push, pull_request]
+
+jobs:
+  build:
+    name: GolangCI-lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup golangci-lint Action
+        uses: nickhstr/action-setup-golangci-lint@v0.1.0
