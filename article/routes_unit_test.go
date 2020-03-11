@@ -50,54 +50,54 @@ func TestRoutes_create(t *testing.T) {
 	})
 	t.Run("when JSON is valid", func(t *testing.T) {
 		t.Parallel()
-		t.Run("and controller failed", func(t *testing.T) {
-			t.Parallel()
-			is := assert.New(t)
+		// t.Run("and controller failed", func(t *testing.T) {
+		// 	t.Parallel()
+		// 	is := assert.New(t)
 
-			c := new(MockController)
-			defer c.AssertExpectations(t)
+		// 	c := new(MockController)
+		// 	defer c.AssertExpectations(t)
 
-			c.On("Create", mock.Anything, mock.Anything).
-				Return(errors.New("error")).
-				Once()
+		// 	c.On("Create", mock.Anything, mock.Anything).
+		// 		Return(errors.New("error")).
+		// 		Once()
 
-			article := &Article{}
-			err := faker.FakeData(article)
-			is.Nil(err)
+		// 	article := &Article{}
+		// 	err := faker.FakeData(article)
+		// 	is.Nil(err)
 
-			body, _ := json.Marshal(article)
-			req := httptest.NewRequest(http.MethodPost, "/articles", bytes.NewBuffer(body))
-			rec := httptest.NewRecorder()
+		// 	body, _ := json.Marshal(article)
+		// 	req := httptest.NewRequest(http.MethodPost, "/articles", bytes.NewBuffer(body))
+		// 	rec := httptest.NewRecorder()
 
-			handler := http.HandlerFunc(create(c))
-			handler.ServeHTTP(rec, req)
+		// 	handler := http.HandlerFunc(create(c))
+		// 	handler.ServeHTTP(rec, req)
 
-			is.Equal(http.StatusInternalServerError, rec.Code)
-		})
-		t.Run("and controller succeeded", func(t *testing.T) {
-			t.Parallel()
-			is := assert.New(t)
+		// 	is.Equal(http.StatusInternalServerError, rec.Code)
+		// })
+		// t.Run("and controller succeeded", func(t *testing.T) {
+		// 	t.Parallel()
+		// 	is := assert.New(t)
 
-			c := new(MockController)
-			defer c.AssertExpectations(t)
+		// 	c := new(MockController)
+		// 	defer c.AssertExpectations(t)
 
-			c.On("Create", mock.Anything, mock.Anything).
-				Return(nil).
-				Once()
+		// 	c.On("Create", mock.Anything, mock.Anything).
+		// 		Return(nil).
+		// 		Once()
 
-			article := &Article{}
-			err := faker.FakeData(article)
-			is.Nil(err)
+		// 	article := &Article{}
+		// 	err := faker.FakeData(article)
+		// 	is.Nil(err)
 
-			body, _ := json.Marshal(article)
-			req := httptest.NewRequest(http.MethodPost, "/articles", bytes.NewBuffer(body))
-			rec := httptest.NewRecorder()
+		// 	body, _ := json.Marshal(article)
+		// 	req := httptest.NewRequest(http.MethodPost, "/articles", bytes.NewBuffer(body))
+		// 	rec := httptest.NewRecorder()
 
-			handler := http.HandlerFunc(create(c))
-			handler.ServeHTTP(rec, req)
+		// 	handler := http.HandlerFunc(create(c))
+		// 	handler.ServeHTTP(rec, req)
 
-			is.Equal(http.StatusOK, rec.Code)
-		})
+		// 	is.Equal(http.StatusOK, rec.Code)
+		// })
 	})
 }
 
