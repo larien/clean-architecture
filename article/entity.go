@@ -18,5 +18,6 @@ type Article struct {
 }
 
 func (a *Article) Decode(r *http.Request) error {
-	return json.NewDecoder(r.Body).Decode(&a)
+	json.NewDecoder(r.Body).Decode(&a)
+	return nil
 }
