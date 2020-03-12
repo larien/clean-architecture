@@ -288,3 +288,7 @@ linters:
     - bugs
     - unused
   fast: true
+
+new: true
+
+new-from-rev: 0fe69bbd922eb1fc485df82e0a9944bfa7d91519
