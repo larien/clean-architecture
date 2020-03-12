@@ -2,7 +2,6 @@ package article
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -19,7 +18,6 @@ type Article struct {
 }
 
 func (a *Article) Decode(r *http.Request) error {
-	fmt.Println("This is a test")
 	json.NewDecoder(r.Body).Decode(&a)
 	return nil
 }
