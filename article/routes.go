@@ -28,6 +28,8 @@ func create(controller Controller) http.HandlerFunc {
 			return
 		}
 
+		article.Decode(r) // this should also trigger golangci-lint
+
 		controller.Create(article) // this should trigger golangci-lint
 
 		if err := controller.Create(article); err != nil {
